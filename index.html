@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <!-- PWA Meta Tags -->
+  <title>VectorLogix</title>
+  <meta name="description" content="Professional offline fleet and logistics management system">
+  <meta name="theme-color" content="#3b82f6">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="VectorLogix">
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- App Icons -->
+  <link rel="icon" type="image/png" href="icon-512.png">
+  <link rel="apple-touch-icon" href="icon-512.png">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div id="root"></div>
+
+  <!-- Firebase App & Realtime Database CDN (Vanilla JS Offline & Online Sync) -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+
+  <!-- Load App Scripts Sequentially -->
+  <script src="data.js"></script>
+  <script src="components.js"></script>
+  <script src="app.js"></script>
+
+  <!-- Register Service Worker for PWA / Offline Support -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log('[VectorLogix] Service Worker registered:', reg.scope))
+          .catch(err => console.warn('[VectorLogix] SW registration failed:', err));
+      });
+    }
+  </script>
+</body>
+</html>
